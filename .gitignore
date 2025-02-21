@@ -5,3 +5,5 @@
 /LBAngularNet/.vs/LBAngularNet
 /LBAngularNet/LBAngularNet/ClientApp/.angular/cache/14.1.3
 /LBAngularNet/.vs/ProjectEvaluation
+/LBAngularNet/TestUnit/obj
+/LBAngularNet/TestUnit/bin/Debug/net7.0
