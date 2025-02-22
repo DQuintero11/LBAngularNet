@@ -11,8 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="Elasticsearch.Net" Version="7.17.5" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.1" />
+    <PackageReference Include="NEST" Version="7.17.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,13 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\DTO\" />
     <Folder Include="Application\Commands\" />
-    <Folder Include="Application\Queries\" />
-    <Folder Include="Core\Domain\Entities\" />
     <Folder Include="Core\Domain\Interfaces\" />
-    <Folder Include="Core\Domain\Services\" />
     <Folder Include="Core\Infraestructure\Configurations\" />
+    <Folder Include="Core\Infraestructure\ElasticSearch\" />
     <Folder Include="Core\Infraestructure\Persistence\" />
   </ItemGroup>
 

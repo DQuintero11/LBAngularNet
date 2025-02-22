@@ -1,8 +1,10 @@
 using Microsoft.OpenApi.Models;
+using Nest;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+AddElasticSearch();
 AddSwaggerConfig();
 AddControllersViews();
 AddDbContext();
@@ -120,4 +122,15 @@ void AddMaps()
     pattern: "{controller}/{action=Index}/{id?}");
 
     app.MapFallbackToFile("index.html");
+}
+
+
+///
+void AddElasticSearch()
+{
+    var settings = new ConnectionSettings(new Uri("http://localhost:9200")).DefaultIndex("Demo");
+
+    var elasticClient = new ElasticClient(settings);
+
+    builder.Services.AddSingleton(elasticClient);   
 }
