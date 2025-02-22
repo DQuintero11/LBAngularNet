@@ -4,12 +4,15 @@ using Microsoft.OpenApi.Models;
 using Nest;
 using System;
 using System.Text;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 AddJWTConfig();
 AddElasticSearch();
+AddRedis();
 AddSwaggerConfig();
 AddControllersViews();
 AddDbContext();
@@ -140,6 +143,17 @@ void AddElasticSearch()
     builder.Services.AddSingleton(elasticClient);   
 }
 
+///
+void AddRedis()
+{
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = "localhost:6379";
+        options.InstanceName = "MiApp_";
+    });
+}
+
+///
 void AddJWTConfig()
 {
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
