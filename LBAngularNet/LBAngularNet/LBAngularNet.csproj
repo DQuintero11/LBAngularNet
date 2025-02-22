@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Application\DTO\" />
     <Folder Include="Application\Commands\" />
     <Folder Include="Application\Queries\" />
