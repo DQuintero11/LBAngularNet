@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <Folder Include="Application\Commands\" />
+    <Folder Include="Application\enums\" />
     <Folder Include="Core\Domain\Interfaces\" />
     <Folder Include="Core\Infraestructure\Configurations\" />
     <Folder Include="Core\Infraestructure\ElasticSearch\" />
