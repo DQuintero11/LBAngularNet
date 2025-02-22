@@ -1,47 +1,29 @@
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 AddSwaggerConfig();
 AddControllersViews();
+AddDbContext();
+AddDependencyInjectionServices();
+AddDependencyInjectionRepositorys();
 AddHttpDirections();
-
-// CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngular", policy =>
-    {
-        policy.WithOrigins("http://localhost:7102") // Puerto de Angular
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
-});
+AddCors();
 
 var app = builder.Build();
 
-//HABILITA CORS
-app.UseCors("AllowAngular");
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    // Habilita swagger en dllo
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+HabilitaCORS();
+isDevelopment();
 
 app.UseStaticFiles();
 app.UseRouting();
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-
-app.MapFallbackToFile("index.html");
+AddMaps();
 
 app.Run();
+
+
 
 
 
@@ -54,7 +36,7 @@ void AddSwaggerConfig()
     builder.Services.AddSwaggerGen();
 }
 
-//
+///
 void AddHttpDirections()
 {
     builder.Services.AddHttpsRedirection(options =>
@@ -63,9 +45,79 @@ void AddHttpDirections()
     });
 }
 
-
+///
 void AddControllersViews()
 {
     // Add services to the container.
     builder.Services.AddControllersWithViews();
+}
+
+///
+void AddDependencyInjectionServices()
+{
+    //builder.Services.AddScoped<EmployeeServices>();
+    //builder.Services.AddScoped<ShipperServices>();
+    //builder.Services.AddScoped<ProductsServices>();
+    //builder.Services.AddScoped<OrdersServices>();
+}
+
+///
+void AddDependencyInjectionRepositorys()
+{
+
+    //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+    //builder.Services.AddScoped<IShipperRepository, ShipperRepository>();
+    //builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
+    //builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+}
+
+///
+void AddDbContext()
+{
+    //  builder.Services.AddDbContext<AppDbContext>(options =>
+    //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+
+///
+void AddCors()
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAngular", policy =>
+        {
+            policy.WithOrigins("http://localhost:7102") // Puerto de Angular
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+    });
+}
+
+/// 
+void HabilitaCORS()
+{
+    //HABILITA CORS
+    app.UseCors("AllowAngular");
+}
+
+///
+void isDevelopment()
+{
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        // Habilita swagger en dllo
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+}
+
+
+///
+void AddMaps()
+{
+    app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+
+    app.MapFallbackToFile("index.html");
 }
